@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+xoutput=$(xrandr -q | grep "\sconnected\s")
+
+for line in "$xoutput" ; do
+	echo "$line" | awk '{print $1}'
+done
+

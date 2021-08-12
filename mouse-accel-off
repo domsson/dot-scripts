@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# Attempts to turn off mouse acceleration for all connected mice by querying
+# xinput for devices with the "libinput Accel Speed" property, then sets this 
+# property to -1 for all relevant devices, which should mean "off".
+
+# the property we're looking for and value we want to set it to
+accelprop="libinput Accel Speed"
+acceloff="-1"
+
+# get all xinput device IDs
+devices=$(xinput list --id-only) 
+
+# iterate all devices
+for device in $devices; do
+	# figure out if they have the relevant property
+	hasaccel=$(xinput list-props ${device} | grep "${accelprop}" | wc -l)
+	if [ $hasaccel -gt 0 ]; then
+		# set the property to the desired value
+		xinput --set-prop ${device} "${accelprop}" ${acceloff}
+	fi
+done
+

@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+
+mcount=$(count-monitors)
+mnames=$(list-monitors)
+
+#for monitor in "$mnames" ; do
+#	echo "$monitor"
+#	if [ "$monitor" == "$1" ]; then
+#		echo "found it"
+#	fi
+#done
+
+#for i in "${mnames[@]}" ; do
+#	echo "$i"
+#	if [ "$i" == "$1" ] ; then
+#		echo "Found"
+#	fi
+#done
+
+#for line in "$xoutput" ; do
+#	echo "$line" | awk '{print $1}'
+#done
+
+#if [ "$1" ]; then
+#	echo $1
+#else
+#	echo "default"
+#fi
+
+if [ "$mcount" -eq 1 ] ; then
+	bspc monitor -d 1 2 3 4 5 6
+else
+	xrandr --output DP-0 --primary --auto --output HDMI-0 --auto --right-of DP-0
+	#xrandr --output DP-0 --primary --auto --output HDMI-0 --auto --above DP-0
+	bspc wm -O DP-0 HDMI-0 # order the monitors, DP-0 being the first
+	bspc monitor DP-0   -d 1 2 3 4 5 6
+	bspc monitor HDMI-0 -d R
+	bspc monitor DP-0 -f   # make DP-0 the focused monitor
+	echo "%{c}lemonbar" | lemonbar -p -g x24+0+1080 -F "#e0e2e4" -B "#293134" &
+fi
+
