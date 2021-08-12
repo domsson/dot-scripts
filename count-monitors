@@ -1,3 +1,5 @@
-#!/usr/bin/env bash
+#!/bin/bash
+
+# Prints the number of connected monitors.
 
 echo $(xrandr -q | grep "\sconnected\s" | wc -l)

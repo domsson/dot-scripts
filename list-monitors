@@ -1,4 +1,6 @@
-#!/usr/bin/env bash
+#!/bin/bash
+
+# Prints the name/ID of all connected monitors.
 
 xoutput=$(xrandr -q | grep "\sconnected\s")
 
