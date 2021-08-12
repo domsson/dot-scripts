@@ -11,6 +11,8 @@ In order to have them available via `$PATH`, I've added this to my `.profile`:
         PATH="$HOME/.scripts:$PATH"
     fi
 
+Oh, and don't forget to `chmod +x` all files so they can be executed.
+
 ## License/ Copyright
 
 If you find anything in here useful, you can just use it.
